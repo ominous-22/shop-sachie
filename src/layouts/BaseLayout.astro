@@ -8,10 +8,10 @@ interface Props {
 const settingsEntry = await getEntry('settings', 'site');
 const site = settingsEntry?.data ?? {
   siteTitle: 'SHOP SACHIE',
-  tagline: 'Art, Dolls & Salvaged Furniture',
-  statusBanner: 'Welcome to the studio.',
-  accentColor: '#e63946',
-  backgroundColor: '#f7f4ef',
+  tagline: 'Sculptures, handmade dolls, obscure paintings, and salvaged furniture.',
+  statusBanner: '✦ SHOP SACHIE — OPEN FOR COMMISSIONS & DROPS ✦',
+  accentColor: '#ff2a85',
+  backgroundColor: '#121215',
   contactEmail: 'hello@example.com',
 };
 
@@ -22,7 +22,7 @@ const pageTitle = Astro.props.title
 
 function isDarkColor(hex: string): boolean {
   const clean = hex.replace('#', '');
-  if (clean.length !== 6) return false;
+  if (clean.length !== 6) return true;
   const r = parseInt(clean.substring(0, 2), 16);
   const g = parseInt(clean.substring(2, 4), 16);
   const b = parseInt(clean.substring(4, 6), 16);
@@ -41,7 +41,7 @@ const darkMode = isDarkColor(site.backgroundColor);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@700;800&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -49,9 +49,11 @@ const darkMode = isDarkColor(site.backgroundColor);
     style={`
       --bg: ${site.backgroundColor};
       --accent: ${site.accentColor};
-      --ink: ${darkMode ? '#f4f1ea' : '#181818'};
-      --card-bg: ${darkMode ? '#222222' : '#ffffff'};
-      --border: ${darkMode ? 'rgba(255,255,255,0.2)' : '#181818'};
+      --lime: #b8ff2c;
+      --ink: ${darkMode ? '#f5f5f7' : '#121215'};
+      --card-bg: ${darkMode ? '#1a1a20' : '#ffffff'};
+      --border: ${site.accentColor};
+      --grid-line: ${darkMode ? 'rgba(255, 42, 133, 0.11)' : 'rgba(255, 42, 133, 0.15)'};
     `}
   >
     {site.statusBanner && (
@@ -66,18 +68,42 @@ const darkMode = isDarkColor(site.backgroundColor);
     )}
 
     <header class="site-header">
-      <div class="header-inner">
-        <a href={`${base}/`} class="brand">{site.siteTitle}</a>
+      <div class="header-top">
+        <div class="brand-lockup">
+          <!-- Cute-demented bug-eyed geometric mascot -->
+          <svg class="mascot" viewBox="0 0 110 110" width="76" height="76" aria-hidden="true">
+            <line x1="36" y1="26" x2="22" y2="8" stroke="var(--accent)" stroke-width="3" />
+            <circle cx="22" cy="8" r="5" fill="var(--lime)" />
+            <line x1="74" y1="26" x2="90" y2="10" stroke="var(--accent)" stroke-width="3" />
+            <polygon points="90,3 97,15 83,15" fill="var(--accent)" />
+            <polygon points="55,18 98,94 12,94" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="3.5" />
+            <!-- Asymmetrical buggy eyes -->
+            <circle cx="41" cy="60" r="12" fill="#f5f5f7" stroke="var(--accent)" stroke-width="2.5" />
+            <circle cx="44" cy="61" r="4.5" fill="#121215" />
+            <circle cx="69" cy="56" r="16" fill="#f5f5f7" stroke="var(--accent)" stroke-width="2.5" />
+            <circle cx="65" cy="58" r="6" fill="#121215" />
+            <!-- Happy crooked geometric grin -->
+            <polyline points="38,79 48,85 62,84 73,76" fill="none" stroke="var(--lime)" stroke-width="3" />
+          </svg>
+
+          <div class="title-cluster">
+            <span class="studio-stamp">◆ PORTLAND OOAK • ART + SALVAGE</span>
+            <a href={`${base}/`} class="brand">{site.siteTitle}</a>
+          </div>
+        </div>
+
         <nav class="top-links">
           <a href={`${base}/`}>Gallery & Shop</a>
-          <a href={`${base}/guide`}>Owner's Manual</a>
+          <a href={`${base}/workbench`}>Listing Workbench</a>
+          <a href={`${base}/guide`}>Studio Manual</a>
           {site.instagramHandle && (
             <a
               href={`https://instagram.com/${site.instagramHandle.replace('@', '')}`}
               target="_blank"
               rel="noreferrer"
+              class="ig-pill"
             >
-              IG: {site.instagramHandle}
+              IG {site.instagramHandle}
             </a>
           )}
         </nav>
@@ -89,11 +115,11 @@ const darkMode = isDarkColor(site.backgroundColor);
 
     <footer class="site-footer">
       <div>
-        <strong>{site.siteTitle}</strong> — Inquiries & Commissions:{' '}
+        <strong>{site.siteTitle}</strong> — Commissions & Holds:{' '}
         <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
       </div>
       <div class="mono-small">
-        Powered by Astro & Pages CMS • <a href={`${base}/guide`}>Edit Site Guide</a>
+        <a href={`${base}/workbench`}>Cross-Post Desk</a> ◆ <a href={`${base}/guide`}>Owner's Manual</a>
       </div>
     </footer>
   </body>
@@ -104,6 +130,10 @@ const darkMode = isDarkColor(site.backgroundColor);
   body {
     margin: 0;
     background-color: var(--bg);
+    background-image:
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 36px 36px;
     color: var(--ink);
     font-family: 'Space Grotesk', system-ui, sans-serif;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -111,55 +141,109 @@ const darkMode = isDarkColor(site.backgroundColor);
   a { color: inherit; }
   .ticker {
     background: var(--accent);
-    color: #ffffff;
+    color: #121215;
     font-family: 'Space Mono', monospace;
     font-size: 0.82rem;
     font-weight: 700;
     padding: 0.5rem 0;
     overflow: hidden;
     white-space: nowrap;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 2px solid var(--accent);
   }
   .ticker-track {
     display: inline-flex;
     gap: 3rem;
-    animation: marquee 26s linear infinite;
+    animation: marquee 24s linear infinite;
   }
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
   .site-header {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 2.5rem 1.5rem 1.5rem;
+    padding: 2.25rem 1.5rem 1.75rem;
     border-bottom: 2px solid var(--border);
   }
-  .header-inner {
+  .header-top {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .mascot {
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .brand-lockup:hover .mascot {
+    transform: rotate(-8deg) scale(1.08);
+  }
+  .title-cluster {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .studio-stamp {
+    display: inline-block;
+    width: fit-content;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.18rem 0.55rem;
+    border: 1.5px solid var(--accent);
+    color: var(--lime);
+    background: var(--card-bg);
   }
   .brand {
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.3rem, 5.5vw, 4.2rem);
+    font-weight: 800;
+    line-height: 0.95;
     text-decoration: none;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
     text-transform: uppercase;
+    text-shadow: 3px 3px 0 var(--accent);
   }
   .top-links {
     display: flex;
-    gap: 1.25rem;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
     font-family: 'Space Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 0.84rem;
   }
-  .top-links a { text-decoration: none; border-bottom: 2px solid transparent; }
-  .top-links a:hover { border-bottom-color: var(--accent); }
-  .tagline { max-width: 640px; font-size: 1.1rem; margin: 0.75rem 0 0; opacity: 0.85; }
+  .top-links a {
+    text-decoration: none;
+    padding: 0.4rem 0.7rem;
+    border: 1.5px solid var(--border);
+    background: var(--card-bg);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .top-links a:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 3px 3px 0 var(--accent);
+  }
+  .ig-pill {
+    background: var(--accent) !important;
+    color: #121215 !important;
+    font-weight: 700;
+  }
+  .tagline {
+    max-width: 680px;
+    font-size: 1.08rem;
+    margin: 1.15rem 0 0;
+    opacity: 0.9;
+    line-height: 1.5;
+  }
   .site-footer {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 4rem auto 0;
     padding: 2rem 1.5rem 3rem;
     border-top: 2px solid var(--border);
@@ -167,7 +251,7 @@ const darkMode = isDarkColor(site.backgroundColor);
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 1rem;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
-  .mono-small { font-family: 'Space Mono', monospace; font-size: 0.8rem; opacity: 0.75; }
+  .mono-small { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--accent); }
 </style>
