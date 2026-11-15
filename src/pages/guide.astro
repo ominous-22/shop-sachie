@@ -1,69 +1,281 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<BaseLayout title="Studio Manual">
-  <main class="manual">
-    <h1>Welcome to Shop Sachie</h1>
-    <p class="lead">
-      No algorithms, no Marketplace lowballers, no monthly fees. Just a home for your sculptures, 
-      dolls, paintings, and furniture flips. Here is how to run the whole thing from your phone or laptop.
-    </p>
+<BaseLayout title="Studio Guide">
+  <main class="guide-container">
+    <header class="guide-header">
+      <span class="kicker">Owner’s Manual</span>
+      <h1>Running Your Studio &amp; Gallery</h1>
+      <p>
+        Everything on your site is managed from your phone or laptop through{' '}
+        <a href="https://app.pagescms.org" target="_blank" rel="noreferrer">Pages CMS</a>—no code or
+        terminal required. Whenever you hit <strong>Save</strong>, the site updates automatically in
+        about 45 seconds.
+      </p>
+    </header>
 
-    <section>
-      <h2>1. Posting Something New (The 60-Second Flow)</h2>
-      <ol>
-        <li>Open your bookmark to <strong>app.pagescms.org</strong> and sign in with GitHub.</li>
-        <li>Click <strong>Art, Dolls & Furniture</strong> on the left, then hit <strong>New Entry</strong>.</li>
-        <li>Drop in your photos straight from your camera roll.</li>
+    <section class="guide-section">
+      <h2>1. How Your Four Gallery Sections Work</h2>
+      <p class="section-intro">
+        When you create or edit an entry under <strong>Works &amp; Finds</strong> in Pages CMS, the{' '}
+        <strong>Gallery Section</strong> dropdown decides where it lives on the homepage:
+      </p>
+
+      <div class="room-grid">
+        <div class="room-card">
+          <span class="room-tag">For Sale • Curated</span>
+          <h3>Quality Finds</h3>
+          <p>
+            Vintage furniture, estate pieces, and salvaged objects you restore or curate for sale.
+            Set Availability to <strong>Available</strong> and add a price so it appears under both{' '}
+            <em>For Sale</em> and <em>Quality Finds</em>.
+          </p>
+        </div>
+
+        <div class="room-card">
+          <span class="room-tag">For Sale • Studio Work</span>
+          <h3>Originals for Sale</h3>
+          <p>
+            Your own sculptures, articulated dolls, paintings, and one-of-a-kind works available to
+            collectors. Visitors can click any piece to inspect full notes, dimensions, and inquire
+            or purchase.
+          </p>
+        </div>
+
+        <div class="room-card">
+          <span class="room-tag">Personal Curation</span>
+          <h3>Collection</h3>
+          <p>
+            Objects, ceramics, and reference pieces you collect and live with in the studio—not for
+            sale. Set Availability to <strong>Not for Sale</strong> so price tags and inquiry buttons
+            stay hidden.
+          </p>
+        </div>
+
+        <div class="room-card">
+          <span class="room-tag">Body of Work</span>
+          <h3>Original Archive</h3>
+          <p>
+            Past original works, studies, and sold pieces you want to document as part of your
+            ongoing portfolio. Mark sold works as <strong>Sold</strong> to display a quiet{' '}
+            <em>Sold</em> label.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="guide-section">
+      <h2>2. Posting a New Piece from Your Phone</h2>
+      <ol class="step-list">
         <li>
-          Pick a <strong>Status</strong>—this automatically sorts your site for you:
-          <ul>
-            <li><strong>Available:</strong> Goes straight to <em>The Showroom</em> with a price tag and inquiry/buy button.</li>
-            <li><strong>Sold:</strong> Moves to <em>Oddities & Archive</em> with a "Sold" stamp so people can still admire your work.</li>
-            <li><strong>WIP:</strong> Lands on <em>The Workbench</em>—perfect for half-finished dolls, paint tests, and thrift store "before" pics.</li>
-          </ul>
+          Open <a href="https://app.pagescms.org" target="_blank" rel="noreferrer">app.pagescms.org</a>{' '}
+          and select <strong>shop-sachie</strong>.
         </li>
-        <li>Hit <strong>Save</strong>. Give it ~45 seconds to bake, then refresh your live site!</li>
+        <li>
+          Tap <strong>Works &amp; Finds</strong>, then tap <strong>New Entry</strong>.
+        </li>
+        <li>
+          Upload your <strong>Primary Photograph</strong> straight from your camera roll, plus any
+          detail angles or before-and-after shots under <strong>Detail &amp; Alternate Views</strong>.
+        </li>
+        <li>
+          Choose the <strong>Gallery Section</strong>, <strong>Availability</strong>, and{' '}
+          <strong>Medium</strong>, then fill in dimensions, materials, and your curatorial notes.
+        </li>
+        <li>
+          Tap <strong>Save</strong>. Your live gallery rebuilds automatically in under a minute.
+        </li>
       </ol>
     </section>
 
-    <section>
-      <h2>2. You Just Sold a Piece—Now What?</h2>
-      <p>
-        Don't delete it! Open that piece in your editor, switch the <strong>Status</strong> dropdown 
-        from <em>Available</em> to <em>Sold</em>, and hit <strong>Save</strong>. Your portfolio keeps 
-        growing every time you make a sale.
+    <section class="guide-section">
+      <h2>3. Using Your Private Studio Desk (<a href={`${base}/studio`}>/studio</a>)</h2>
+      <p class="section-intro">
+        Your <a href={`${base}/studio`}>Studio Desk</a> is a working back-office page for tracking
+        numbers and cross-posting items without cluttering your public gallery:
       </p>
+
+      <div class="two-col">
+        <div class="info-box">
+          <h3>Sales &amp; Studio Ledger</h3>
+          <p>
+            Each entry has two optional number fields in Pages CMS that never appear on the public
+            gallery cards:
+          </p>
+          <ul>
+            <li>
+              <strong>Private Studio Spend ($):</strong> What you paid to acquire a piece plus
+              restoration or art materials.
+            </li>
+            <li>
+              <strong>Private Final Sale Amount ($):</strong> What the piece actually sold for once
+              Availability is switched to <strong>Sold</strong>.
+            </li>
+          </ul>
+          <p>
+            Your <a href={`${base}/studio`}>Studio Desk</a> automatically totals your{' '}
+            <strong>Gross Sales</strong>, <strong>Total Studio Spend</strong>, and{' '}
+            <strong>Net Balance</strong> across every piece.
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h3>External Listing Prep (eBay &amp; Marketplace)</h3>
+          <p>
+            Every item marked <strong>Available</strong> under <em>Quality Finds</em> or{' '}
+            <em>Originals for Sale</em> automatically generates ready-to-paste copy on your{' '}
+            <a href={`${base}/studio`}>Studio Desk</a>:
+          </p>
+          <ul>
+            <li>
+              <strong>eBay Title &amp; Description:</strong> Pre-trimmed to eBay’s 80-character
+              title limit with provenance, dimensions, and condition notes formatted cleanly.
+            </li>
+            <li>
+              <strong>Facebook Marketplace / Local:</strong> Clean local-buyer post with pickup
+              notes and dimensions up front, plus a <strong>Download Photo</strong> link.
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>3. Changing the Colors, Banner & Bio</h2>
-      <p>
-        Want to announce a weekend pop-up or switch the gallery wall color? Click 
-        <strong>Site Vibe & Bio Settings</strong> in your dashboard:
-      </p>
-      <ul>
-        <li><strong>Top Ticker Banner:</strong> Change the scrolling message at the top of the page anytime.</li>
-        <li><strong>Accent & Wall Colors:</strong> Paste any hex code (e.g., <code>#ff4d00</code> for safety orange or <code>#141414</code> for dark gallery mode) and hit Save.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>4. It's 100% Yours</h2>
-      <p>
-        Every photo and note you upload lives in clean folders inside your own GitHub account. 
-        If you ever want to add a custom domain name (like <code>shopsachie.com</code>) or redesign the 
-        whole layout later, you own every single file.
+    <section class="guide-section">
+      <h2>4. Updating Your Bio, Contact Info, or Palette</h2>
+      <p class="section-intro">
+        Open <strong>Studio Settings</strong> inside Pages CMS to update your artist statement,
+        contact email, Instagram handle, or background and accent hex tones at any time.
       </p>
     </section>
   </main>
 </BaseLayout>
 
 <style>
-  .manual { max-width: 680px; margin: 4rem auto; padding: 0 1.5rem; line-height: 1.7; }
-  h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-  .lead { font-size: 1.15rem; opacity: 0.85; margin-bottom: 2.5rem; }
-  section { margin-bottom: 2.5rem; border-top: 2px solid var(--border); padding-top: 1.5rem; }
-  code { background: rgba(128,128,128,0.15); padding: 0.15rem 0.4rem; border-radius: 4px; }
+  .guide-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2.75rem 1.5rem 4rem;
+  }
+  .guide-header {
+    padding-bottom: 2.25rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .kicker {
+    display: inline-block;
+    font-size: 0.76rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .guide-header h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.35rem;
+    font-weight: 500;
+    margin: 0 0 0.85rem;
+    line-height: 1.15;
+  }
+  .guide-header p {
+    margin: 0;
+    max-width: 680px;
+    color: var(--muted);
+    font-size: 0.96rem;
+  }
+  .guide-header a,
+  .guide-section a {
+    color: var(--ink);
+    border-bottom: 1px solid var(--accent);
+  }
+
+  .guide-section {
+    margin-bottom: 3.5rem;
+  }
+  .guide-section h2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    margin: 0 0 0.75rem;
+  }
+  .section-intro {
+    margin: 0 0 1.5rem;
+    color: var(--muted);
+    font-size: 0.94rem;
+    max-width: 720px;
+  }
+
+  .room-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 700px) {
+    .room-grid { grid-template-columns: 1fr; }
+  }
+  .room-card,
+  .info-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+  }
+  .room-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.45rem;
+  }
+  .room-card h3,
+  .info-box h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin: 0 0 0.6rem;
+  }
+  .room-card p,
+  .info-box p {
+    margin: 0 0 0.75rem;
+    font-size: 0.9rem;
+    color: #d4d1ca;
+  }
+  .room-card p:last-child,
+  .info-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .step-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    font-size: 0.94rem;
+    color: #dcd9d2;
+  }
+  .step-list li::marker {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  @media (max-width: 740px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+  .info-box ul {
+    margin: 0 0 0.85rem;
+    padding-left: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.88rem;
+    color: #d4d1ca;
+  }
 </style>
