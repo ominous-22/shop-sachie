@@ -38,16 +38,25 @@ content:
         options:
           multiple: true
       - name: price
-        label: Price (Leave blank for Sold or WIPs)
+        label: Price (e.g. $240)
         type: string
       - name: dimensions
         label: Dimensions (H x W x D)
         type: string
       - name: materials
-        label: Materials / Notes
+        label: Materials / Wood / Finish
+        type: string
+      - name: eraOrStyle
+        label: Era / Style (e.g. Mid-Century, 1970s, Brutalist, OOAK)
+        type: string
+      - name: conditionNotes
+        label: Condition & Restoration Notes (Auto-fills eBay & Marketplace!)
+        type: string
+      - name: pickupLocation
+        label: Pickup / Delivery Area (e.g. Portland local pickup or curb delivery)
         type: string
       - name: paymentLink
-        label: Direct Checkout Link (Optional Stripe/PayPal link)
+        label: Direct Checkout Link (Optional Stripe/PayPal/Ko-fi link)
         type: string
       - name: featured
         label: Pin to Top of Homepage?
