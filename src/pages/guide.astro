@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Studio Manual">
+  <main class="manual">
+    <h1>Welcome to Shop Sachie</h1>
+    <p class="lead">
+      No algorithms, no Marketplace lowballers, no monthly fees. Just a home for your sculptures, 
+      dolls, paintings, and furniture flips. Here is how to run the whole thing from your phone or laptop.
+    </p>
+
+    <section>
+      <h2>1. Posting Something New (The 60-Second Flow)</h2>
+      <ol>
+        <li>Open your bookmark to <strong>app.pagescms.org</strong> and sign in with GitHub.</li>
+        <li>Click <strong>Art, Dolls & Furniture</strong> on the left, then hit <strong>New Entry</strong>.</li>
+        <li>Drop in your photos straight from your camera roll.</li>
+        <li>
+          Pick a <strong>Status</strong>—this automatically sorts your site for you:
+          <ul>
+            <li><strong>Available:</strong> Goes straight to <em>The Showroom</em> with a price tag and inquiry/buy button.</li>
+            <li><strong>Sold:</strong> Moves to <em>Oddities & Archive</em> with a "Sold" stamp so people can still admire your work.</li>
+            <li><strong>WIP:</strong> Lands on <em>The Workbench</em>—perfect for half-finished dolls, paint tests, and thrift store "before" pics.</li>
+          </ul>
+        </li>
+        <li>Hit <strong>Save</strong>. Give it ~45 seconds to bake, then refresh your live site!</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>2. You Just Sold a Piece—Now What?</h2>
+      <p>
+        Don't delete it! Open that piece in your editor, switch the <strong>Status</strong> dropdown 
+        from <em>Available</em> to <em>Sold</em>, and hit <strong>Save</strong>. Your portfolio keeps 
+        growing every time you make a sale.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Changing the Colors, Banner & Bio</h2>
+      <p>
+        Want to announce a weekend pop-up or switch the gallery wall color? Click 
+        <strong>Site Vibe & Bio Settings</strong> in your dashboard:
+      </p>
+      <ul>
+        <li><strong>Top Ticker Banner:</strong> Change the scrolling message at the top of the page anytime.</li>
+        <li><strong>Accent & Wall Colors:</strong> Paste any hex code (e.g., <code>#ff4d00</code> for safety orange or <code>#141414</code> for dark gallery mode) and hit Save.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. It's 100% Yours</h2>
+      <p>
+        Every photo and note you upload lives in clean folders inside your own GitHub account. 
+        If you ever want to add a custom domain name (like <code>shopsachie.com</code>) or redesign the 
+        whole layout later, you own every single file.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .manual { max-width: 680px; margin: 4rem auto; padding: 0 1.5rem; line-height: 1.7; }
+  h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+  .lead { font-size: 1.15rem; opacity: 0.85; margin-bottom: 2.5rem; }
+  section { margin-bottom: 2.5rem; border-top: 2px solid var(--border); padding-top: 1.5rem; }
+  code { background: rgba(128,128,128,0.15); padding: 0.15rem 0.4rem; border-radius: 4px; }
+</style>

@@ -1,0 +1,173 @@
+---
+import { getEntry } from 'astro:content';
+
+interface Props {
+  title?: string;
+}
+
+const settingsEntry = await getEntry('settings', 'site');
+const site = settingsEntry?.data ?? {
+  siteTitle: 'SHOP SACHIE',
+  tagline: 'Art, Dolls & Salvaged Furniture',
+  statusBanner: 'Welcome to the studio.',
+  accentColor: '#e63946',
+  backgroundColor: '#f7f4ef',
+  contactEmail: 'hello@example.com',
+};
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const pageTitle = Astro.props.title
+  ? `${Astro.props.title} | ${site.siteTitle}`
+  : site.siteTitle;
+
+function isDarkColor(hex: string): boolean {
+  const clean = hex.replace('#', '');
+  if (clean.length !== 6) return false;
+  const r = parseInt(clean.substring(0, 2), 16);
+  const g = parseInt(clean.substring(2, 4), 16);
+  const b = parseInt(clean.substring(4, 6), 16);
+  return (r * 299 + g * 587 + b * 114) / 1000 < 128;
+}
+
+const darkMode = isDarkColor(site.backgroundColor);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    style={`
+      --bg: ${site.backgroundColor};
+      --accent: ${site.accentColor};
+      --ink: ${darkMode ? '#f4f1ea' : '#181818'};
+      --card-bg: ${darkMode ? '#222222' : '#ffffff'};
+      --border: ${darkMode ? 'rgba(255,255,255,0.2)' : '#181818'};
+    `}
+  >
+    {site.statusBanner && (
+      <div class="ticker">
+        <div class="ticker-track">
+          <span>{site.statusBanner}</span>
+          <span>{site.statusBanner}</span>
+          <span>{site.statusBanner}</span>
+          <span>{site.statusBanner}</span>
+        </div>
+      </div>
+    )}
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a href={`${base}/`} class="brand">{site.siteTitle}</a>
+        <nav class="top-links">
+          <a href={`${base}/`}>Gallery & Shop</a>
+          <a href={`${base}/guide`}>Owner's Manual</a>
+          {site.instagramHandle && (
+            <a
+              href={`https://instagram.com/${site.instagramHandle.replace('@', '')}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              IG: {site.instagramHandle}
+            </a>
+          )}
+        </nav>
+      </div>
+      <p class="tagline">{site.tagline}</p>
+    </header>
+
+    <slot />
+
+    <footer class="site-footer">
+      <div>
+        <strong>{site.siteTitle}</strong> — Inquiries & Commissions:{' '}
+        <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
+      </div>
+      <div class="mono-small">
+        Powered by Astro & Pages CMS • <a href={`${base}/guide`}>Edit Site Guide</a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  a { color: inherit; }
+  .ticker {
+    background: var(--accent);
+    color: #ffffff;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.5rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 2px solid var(--border);
+  }
+  .ticker-track {
+    display: inline-flex;
+    gap: 3rem;
+    animation: marquee 26s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .site-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .header-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .brand {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+  .top-links {
+    display: flex;
+    gap: 1.25rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+  }
+  .top-links a { text-decoration: none; border-bottom: 2px solid transparent; }
+  .top-links a:hover { border-bottom-color: var(--accent); }
+  .tagline { max-width: 640px; font-size: 1.1rem; margin: 0.75rem 0 0; opacity: 0.85; }
+  .site-footer {
+    max-width: 1200px;
+    margin: 4rem auto 0;
+    padding: 2rem 1.5rem 3rem;
+    border-top: 2px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.95rem;
+  }
+  .mono-small { font-family: 'Space Mono', monospace; font-size: 0.8rem; opacity: 0.75; }
+</style>

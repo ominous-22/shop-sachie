@@ -1,0 +1,91 @@
+media:
+  input: src/assets/uploads
+  output: /src/assets/uploads
+
+content:
+  - name: pieces
+    label: Art, Dolls & Furniture
+    path: src/content/pieces
+    type: collection
+    view:
+      fields: [title, category, status, price, date]
+      primary: title
+      sort: [date, title]
+    fields:
+      - name: title
+        label: Piece Name
+        type: string
+        required: true
+      - name: status
+        label: Status (Controls where it shows up!)
+        type: select
+        options:
+          values: [Available, Sold, Commission Only, WIP]
+        default: Available
+      - name: category
+        label: Medium / Vibe
+        type: select
+        options:
+          values: [Furniture, Sculpture, Dolls, Paintings, Oddities]
+        default: Furniture
+      - name: coverImage
+        label: Main Photo
+        type: image
+        required: true
+      - name: gallery
+        label: Extra Angles / Before & After Photos
+        type: image
+        options:
+          multiple: true
+      - name: price
+        label: Price (Leave blank for Sold or WIPs)
+        type: string
+      - name: dimensions
+        label: Dimensions (H x W x D)
+        type: string
+      - name: materials
+        label: Materials / Notes
+        type: string
+      - name: paymentLink
+        label: Direct Checkout Link (Optional Stripe/PayPal link)
+        type: string
+      - name: featured
+        label: Pin to Top of Homepage?
+        type: boolean
+        default: false
+      - name: date
+        label: Date Posted
+        type: date
+      - name: body
+        label: The Story / Brainstorm Notes
+        type: rich-text
+
+  - name: settings
+    label: Site Vibe & Bio Settings
+    path: src/content/settings/site.json
+    type: file
+    fields:
+      - name: siteTitle
+        label: Studio / Shop Name
+        type: string
+      - name: tagline
+        label: Short Bio / Intro
+        type: text
+      - name: statusBanner
+        label: Top Ticker Banner (Announce drops, markets, or commissions)
+        type: string
+      - name: accentColor
+        label: Accent Color (Buttons, badges, highlights)
+        type: string
+      - name: backgroundColor
+        label: Gallery Wall Color
+        type: string
+      - name: contactEmail
+        label: Inquiry Email
+        type: string
+      - name: instagramHandle
+        label: Instagram Handle
+        type: string
+      - name: venmoOrCashapp
+        label: Venmo / Payment Handle
+        type: string
